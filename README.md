@@ -50,7 +50,7 @@ See the full [Getting Started][getting_started] documentation for more details, 
 ## Running locally
   The application uses [Node.js](http://nodejs.org/) and [npm](https://www.npmjs.com/) so you will have to download and install them as part of the steps below.
 
-1. Copy the credentials from your `alchemy-service` service in Bluemix to `app.js`, you can see the credentials using:
+1. Copy the credentials from your `alchemy-service` service in Bluemix to `credentials.js`, you can see the credentials using:
 
     ```sh
     $ cf env <application-name>
@@ -74,7 +74,7 @@ See the full [Getting Started][getting_started] documentation for more details, 
     }
     ```
 
-    You need to copy `url`, `apikey` and `note`.
+    You need to copy `url` and `apikey`.
 
 2. Install [Node.js](http://nodejs.org/)
 3. Go to the project folder in a terminal and run:
