@@ -1,0 +1,21 @@
+//- about.jade
+extends ./layout.jade
+
+block row-content
+  div.container
+    div.row
+      div.col-lg-12.col-md-12.col-sm-12.col-xs-12
+        h2 About
+        div.row
+          p.help-block
+            | Sentiment and Emotion application detects sentiment and emotions from people's digital footprints by using IBM Watson services. The application analyzes for positive or negative sentiment and for the emotions "anger", "disgust", "sadness", "fear" and "joy".
+            br
+            br
+            | If you are interested in more details, please see 
+            a(style="cursor: pointer", href='http://www.alchemyapi.com/api/emotion-analysis') IBM AlchemyAPI
+            |  and this reference:
+            br
+            br
+            | Jian Zhao, Liang Gou, Fei Wang, Michelle Zhou. 
+            a(style="cursor: pointer", href='http://ieeexplore.ieee.org/xpl/articleDetails.jsp?arnumber=7042496') PEARL: An Interactive Visual Analytic Tool for Understanding Personal Emotion Style Derived from Social Media.
+            |  VAST'14: Proceedings of the IEEE Symposium on Visual Analytics Science and Technology, pp. 203-212, Nov 2014.

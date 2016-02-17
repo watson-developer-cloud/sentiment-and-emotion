@@ -1,0 +1,40 @@
+//- layout.jade
+doctype html
+html(lang="en")
+  head
+    block title
+      title Sentiment and Emotion
+ 
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    meta(name="ct", content=ct)
+    link(rel="stylesheet", href="/css/watson-bootstrap-dark.css")
+    link(rel='stylesheet', href='/css/jquery-linedtextarea.css')
+    link(rel='stylesheet', href='/css/banner.css')
+    link(rel="stylesheet", href="/css/style.css")
+    link(rel="stylesheet", href="/css/emo-viz.css")
+
+  
+
+  body
+    include banner.jade
+
+    block row-content
+
+    include footer.jade
+
+    script(type='text/javascript', src="//code.jquery.com/jquery-2.1.0.min.js")
+    script(type='text/javascript', src="/js/lib/jquery.bootpag.min.js")
+    script(type='text/javascript', src="/js/lib/bootstrap.min.js")
+    script(type='text/javascript', src="/js/lib/jquery-linedtextarea.js")
+    script(type='text/javascript', src="/js/lib/d3.v2.js")
+    script(type='text/javascript', src="/js/lib/d3.layout.cloud.js")
+    script(type='text/javascript') var BASE_API_PATH = "#{api}";
+    script(type='text/javascript', src="/js/config.js")
+    script(type='text/javascript', src="/js/util.js")
+    script(type='text/javascript', src="/js/emoViz.js")
+    script(type='text/javascript', src="/js/emoText.js")
+    script(type='text/javascript', src="/js/emoGenome.js")
+    script(type='text/javascript', src="/js/emoTimeline.js")
+    script(type='text/javascript', src="/js/emoVizApp.js")

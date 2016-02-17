@@ -1,0 +1,203 @@
+/* style.css
+ * This file provides css styles.
+ */
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    /* Margin bottom by footer height */
+
+    margin-bottom: 40px;
+    background-color: #f4f4f4;
+}
+
+.svg-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-bottom: 190px; /* aspect ratio */
+    vertical-align: top;
+    overflow: hidden;
+}
+
+.svg-content-responsive {
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+    left: 0;
+}
+
+.btn,
+.btn-block {
+    margin-bottom: 0em;
+    padding: 0.75em;
+    text-decoration: none;
+}
+
+.reset-icon {
+    margin-right: 0.5em;
+}
+
+footer {
+
+    width: 100%;
+    /* Set the fixed height of the footer here */
+
+}
+
+.errorMsg {
+  color: #E71D32;
+}
+
+footer span.separator {
+  padding-left : 10px;
+  padding-right: 10px;
+}
+
+.footer-content {
+    background: #00B2EF;
+    border-radius: none;
+    border-top: 1px solid #8CC63F;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.flag_true {
+    font-weight: bold;
+    background-color: #cccccc
+}
+
+.logo-img {
+    width: 45px;
+    margin-left: 45px;
+}
+
+.header {
+    padding-bottom: 10px;
+    background: #00B2EF;
+    border-bottom: 4px solid #8CC63F;
+    margin: 0px 0px 10px 0px;
+}
+
+.header h2 {
+    color: #eee;
+    font-size: 24px;
+    margin-top: 9px;
+}
+
+
+.loader {
+    width: 150px;
+    height: 150px;
+    margin: 0px auto;
+}
+
+.loader img {
+    width: 100%;
+    height: auto;
+}
+
+#json {
+    margin-bottom: 1em;
+}
+
+
+.radio-block {
+    display: block;
+}
+
+.radio-inline {
+    padding-left: 0px;
+}
+
+@media screen and (max-width: 525px) {
+    .radio-block input[type="radio"] {
+        margin-left: 0px;
+    }
+}
+
+.tone-radio input[type="radio"] {
+    float: none;
+}
+
+@media screen and (max-width: 525px) {
+    .tone-radio {
+        padding: 0px;
+        margin-right: 5px;
+    }
+    .radio-inline {
+        margin-left: 0px;
+    }
+    .tone-radio input[type="radio"] {
+        margin: 0.5em 0.5em 0.5em 0em;
+    }
+}
+
+@media only screen and (max-width : 1199px) {
+    .svg-container { padding-bottom: 150px; }
+}
+
+@media only screen and (max-width : 768px) {
+    .svg-container { padding-bottom: 140px; }
+}
+
+.json-div {
+    background-color: white;
+    color: black;
+    padding: 5px;
+}
+
+/*penel css to override the default watson one*/
+.panel {
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border: 1px solid transparent;
+
+}
+
+.panel-body {
+  padding: 15px;
+}
+.panel-heading {
+  margin-top: 0em;
+  border-top: 0px;
+  padding: 10px 15px;
+  border-bottom: 1px solid transparent;
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+}
+
+.panel-default {
+  border-color: #dddddd;
+}
+.panel-default > .panel-heading {
+  color: #333333;
+  background-color: #f5f5f5;
+  border-color: #dddddd;
+}
+.panel-default > .panel-heading + .panel-collapse > .panel-body {
+  border-top-color: #dddddd;
+}
+.panel-default > .panel-heading .badge {
+  color: #f5f5f5;
+  background-color: #333333;
+}
+.panel-default > .panel-footer + .panel-collapse > .panel-body {
+  border-bottom-color: #dddddd;
+}
+h2{
+  color: #325c80!important;
+  font-weight: 200;
+}
+
+
+footer a {
+  cursor: pointer;
+}
+
+.well {
+  border-width: 0px!important;
+}

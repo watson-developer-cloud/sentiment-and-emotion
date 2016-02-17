@@ -1,0 +1,70 @@
+//- index.jade
+extends ./layout.jade
+
+block row-content
+  div.container
+    div.row#input_div
+      div.col-lg-12.col-md-12.col-sm-12.col-xs-12
+        h2 Input Text
+        div.row
+          p.help-block
+            | Enter the text that you want to analyze. You can analyze the sample text or use your own text. You can incude multiple sections of text by entering each section on a new line.
+
+        form.form-horizontal(method='post')
+          div.well
+            fieldset
+              div.form-group
+                div
+                  textarea#textArea.form-control(name="content", rows='11', 
+                    placeholder="Please enter the text to analyze ...", required="true") 
+                  p
+                    | &nbsp; &nbsp; * Default demo text is the reviews for 
+                    a(href="http://www.cnet.com/products/amazon-echo/user-reviews/#p=amazon-echo") Amazon Echo obtained from CNET.
+                  
+            div.form-group.row(style='margin-bottom: 0px; padding-top: 5px;')
+              div.col-lg-2.col-md-2.col-sm-4.col-xs-12
+                a.btn-secondary.btn-block.analyze-btn(role="button", ) Analyze
+              
+    //- results section
+    div#results_description.row(style='display:none;')
+      div.col-lg-12.col-md-12.col-sm-12.col-xs-12
+        h2.output-div Output
+        div.row
+          p.help-block
+            | This demo shows the sentiment and emotion patterns in your text sample. The y-axis indicates the level of sentiment (how positive and negative) and the color bands show the overall patterns of the emotion changes section by section in the input text (each text piece is separated by a new line). Each bar shows the composition of emotions for a specific section of text.
+
+
+    div.row#loading(style="display:none;")
+      div.loader
+        img(src="images/loading-indicator.gif")
+    div.row.error(style='display: none;')
+      div.col-lg-12.col-md-12.col-sm-12.col-xs-12.well
+        p.errorMsg
+
+    div#results_row.row   
+      div#emotion_rslts(style='display:none;').col-lg-12.col-md-12.col-sm-12.col-xs-12.well
+        div.form-group.row
+          div.col-lg-12.col-md-12.col-sm-12.col-xs-12
+            div#emotion_overview
+              div.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                div.panel.panel-default
+                  //div.panel-heading
+                    //p Emotion Overview
+                  div.panel-body
+                    div#emotion_timeline
+                    div#page_selection.col-lg-6.col-lg-offset-4.col-md-6.col-md-offset-4
+            div#emotion_details
+                  //div.col-lg-5.col-md-5.col-sm-5
+                  //  div.panel.panel-default
+                  //    div.panel-body#emotion_words(style="padding:0px;")
+                  //div.col-lg-7.col-md-7.col-sm-7
+              div.col-lg-12.col-md-12.col-sm-12.col-xs-12
+                div#emotion_text.panel.panel-default
+                  div.panel-body(style="padding:0px;")
+        div.form-group.row(style='margin-bottom: 0px; padding-top: 5px;')
+            div.col-lg-4.col-lg-push-8.col-md-4.col-md-push-8.col-sm-4.col-sm-push-8.col-xs-12
+              img.icon.reset-icon(src="images/reset.svg")
+              a#start_over Start Over
+              
+              
+    div#tooltip.well      
