@@ -48,14 +48,24 @@ module.exports = function (app) {
   });
 
   // 5. rate limiting
+  var limiterError = {
+    error : 'Too many requests, please try again in 30 seconds.',
+    code  : 429
+  };
   var limiter = rateLimit({
-    windowMs: 30 * 1000, // seconds
+    windowMs: 24 * 60 * 60 * 1000, // 24 hours
     delayMs: 0,
-    max: 20,
-    message: JSON.stringify({
-      error:'Too many requests, please try again in 30 seconds.',
-      code: 429
-    }),
+    max: 500,
+    handler: function (req, res) {
+      res.format({
+        html: function(){
+          res.status(limiterError.code).end(limiterError.error);
+        },
+        json: function(){
+          res.status(limiterError.code).json(limiterError);
+        }
+      });
+    },
   });
 
   // 6. captcha
