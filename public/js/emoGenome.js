@@ -16,7 +16,7 @@
 
 /**
  * This is a visualization component, emoGenone, to show the mixture
- * emotions at one time with a stacked bar design.  
+ * emotions at one time with a stacked bar design.
  * Author: Liang Gou, lgou@us.ibm.com
  * Date: July 20, 2015
  */
@@ -26,12 +26,12 @@ emoViz.emoGenome = function (){
   // Public Variables with Default Settings
   //------------------------------------------------------------
   var   x
-      , y 
+      , y
       , yBand
       , bandHeight = 80
       , genomeWidth = 8
       , colorSchema
-      , animateDuration = 250 
+      , animateDuration = 250
       , emotionCategories //["anger", "disgust", "sadness", "fear", "none", "joy"]
       , dispatch = d3.dispatch('genomeMouseover', 'genomeMouseout','genomeBarMouseover', 'genomeBarMouseout')
       , barZoomHeightFactor = 2.2
@@ -50,8 +50,6 @@ emoViz.emoGenome = function (){
 
       slicedData = transformData(data);
 
-      console.log("The sliced data: ", slicedData);
-
       var genomes = container.selectAll(".emogenome")
           .data(slicedData, function(d){
               return  d.index;
@@ -64,7 +62,7 @@ emoViz.emoGenome = function (){
           .attr("centerY", function(d){ return y(d.emotions[0].sentiment);})
           .call(emoGenomeRender)
           .on("mouseover",function(d,i) {
-            
+
             highlightGenome(d3.select(this));
 
             dispatch.genomeMouseover({
@@ -73,16 +71,16 @@ emoViz.emoGenome = function (){
                 });
           })
           .on("mouseout",function(d,i) {
-            
+
             unhighlightGenome(d3.select(this));
-            
+
             dispatch.genomeMouseout({
                   data: d,
                   pos: [d3.event.pageX, d3.event.pageY]
                 });
           });
-       
-     
+
+
     });
 
     return chart;
@@ -102,10 +100,10 @@ emoViz.emoGenome = function (){
     var len = data[0].values.length;
     var sliced = [];
 
-    for (i = 0; i < len; i++) 
+    for (i = 0; i < len; i++)
       sliced.push({"index": i,
            "date": null, //for future use
-           "emotions": new Array(data.length)}); 
+           "emotions": new Array(data.length)});
 
     data.forEach(function(layer, i){
       layer.values.forEach(function(d,j){
@@ -129,21 +127,20 @@ emoViz.emoGenome = function (){
   function emoGenomeRender(selection){
 
     selection.each(function(data, timeIdx){
-      console.log("The gEmoGenome data: ", data);
 
       var gEmoGenome = d3.select(this);
 
       //add x-axis navigation line
       var lastOne = data.emotions[0]
           ,lastOneBottom = y(lastOne.center)- barZoomHeightFactor * bandHeight/2 + barZoomHeightFactor * yBand(lastOne.y0 + lastOne.y) + barZoomHeightFactor * yBand(1-lastOne.y);
-      
+
       gEmoGenome.append("rect")
           .attr("class", "emogenome-line")
           .attr("x", function(d){ return x(lastOne.x);})
           .attr("y", lastOneBottom)
           .attr("width", 2)
           .attr("height", y.range()[0] - lastOneBottom)
-          .style("opacity", 0);  
+          .style("opacity", 0);
 
       //add y-axis navigation line
       var ynav = gEmoGenome.append("g")
@@ -153,7 +150,7 @@ emoViz.emoGenome = function (){
           ynav.append("rect")
           .attr("x", function(d){ return 0;})
           .attr("y", function(d){ return  y(data.emotions[0].sentiment);})
-          .attr("width", function(d){ 
+          .attr("width", function(d){
               //return x.range()[1];
               var w = (x(data.emotions[0].x)- barZoomWidthFactor * genomeWidth/2);
               if(w < 0) w = 0;
@@ -165,7 +162,7 @@ emoViz.emoGenome = function (){
           .attr("class", "navi-line-text")
           .attr("x", function(d){ return -26;})
           .attr("y", function(d){ return  y(data.emotions[0].sentiment);})
-          .text((1.0 * data.emotions[0].sentiment).toPrecision(2));   
+          .text((1.0 * data.emotions[0].sentiment).toPrecision(2));
 
       //add emotion genome bars
       var genomeBar = gEmoGenome.selectAll(".emogenome-bar")
@@ -180,44 +177,44 @@ emoViz.emoGenome = function (){
           .style("fill", function(d) { return colorSchema[d.emotion]; })
           .style("stroke", function(d) { return colorSchema[d.emotion]; })
           .on("mouseover",function(d,i) {
-              
-              //only highlight selected one:     
+
+              //only highlight selected one:
               gEmoGenome.selectAll(".emogenome-bar")
                   .filter(function(innerd){
                      return (innerd.emotion!==d.emotion);
                   })
                   .style("opacity", 0.5);
-                  
+
               dispatch.genomeBarMouseover({
                     data: d,
                     pos: [d3.event.pageX, d3.event.pageY]
                   });
           })
           .on("mouseout",function(d,i) {
-              
+
               gEmoGenome.selectAll(".emogenome-bar")
                   .style("opacity", 1);
-               
+
               dispatch.genomeBarMouseout({
                     data: d,
                     pos: [d3.event.pageX, d3.event.pageY]
                   });
           });
-       
-          
+
+
     });
 
   }
 
   function highlightGenome (sel){
-               
+
      //show the x-axis navigation line
     sel.selectAll(".emogenome-line")
         .transition()
         .duration(animateDuration)
         .style("opacity", 0.75);
 
-    //enlarge the bar    
+    //enlarge the bar
     sel.selectAll(".emogenome-bar")
         .each(function(d){
             d3.select(this)
@@ -239,7 +236,7 @@ emoViz.emoGenome = function (){
         .duration(animateDuration)
         .style("opacity", 0);
 
-    //resize the bar back   
+    //resize the bar back
     sel.selectAll(".emogenome-bar")
         .each(function(d){
             d3.select(this)
@@ -257,7 +254,7 @@ emoViz.emoGenome = function (){
   //============================================================
   // Expose Public Variables
   //------------------------------------------------------------
-  
+
   chart.dispatch = dispatch;
   //chart.slicedData = slicedData;
 
@@ -269,7 +266,7 @@ emoViz.emoGenome = function (){
     slicedData = _;
     return chart;
   };
-  
+
   chart.x = function(_) {
     if (!arguments.length) return x;
     x = _;
@@ -330,6 +327,6 @@ emoViz.emoGenome = function (){
     return chart;
   };
 
-  return chart; 
+  return chart;
 
 }

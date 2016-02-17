@@ -249,9 +249,6 @@ $(document).ready(function() {
             lastClass: 'last',
             firstClass: 'first'
         }).on('page', function(event, currentPage) {
-
-            console.log('currentPage', currentPage);
-
             CUR_TEXT = (inputText.length > textCountInPage) ? inputText.slice((currentPage - 1) * textCountInPage, currentPage * textCountInPage) : inputText;
 
             CUR_EMOTION_RSLTS = EMOTION_RSLTS.slice((currentPage - 1) * countInPage, currentPage * countInPage);
@@ -278,8 +275,6 @@ $(document).ready(function() {
         $loading.css('display', 'none');
         $results.css('display', 'inline');
         $resultsDes.css('display', 'inline');
-
-        console.log('Emotion data to visualize: ', emodata);
 
         emoTimeline.startLineIndex((currentPage - 1) * textCountInPage + 1);
         emoTimelineSVG.datum(emodata)

@@ -16,7 +16,7 @@
 
 /**
  * This module is used to render text.
- * 
+ *
  * Author: Liang Gou, lgou@us.ibm.com
  * Date: July 20, 2015
  */
@@ -46,8 +46,6 @@ emoViz.emoText = function() {
                 .duration(animateDuration)
                 .style("opacity", 0)
                 .remove();
-
-            //console.log("text", data);          
 
             var group = container.append("div")
                 .attr("class", "list list-group")

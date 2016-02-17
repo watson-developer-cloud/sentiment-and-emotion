@@ -110,8 +110,6 @@ emoViz.emoTimeline = function() {
             //calculate the layout of the stacked layers from the data
             var stackdata = stack(data);
 
-            console.log("The stacked layer data for the emotions: ", stackdata);
-
             //-------------------------------------------------------
             //add axis and labels
             //-------------------------------------------------------
@@ -227,7 +225,6 @@ emoViz.emoTimeline = function() {
             emoGenome.dispatch.on("genomeBarMouseover", function(d) {
                 //get the sliced data for the current genome
                 var pdata = emoGenome.slicedData()[d.data.index];
-                console.log(pdata);
 
                 //show the popup of the emotion scores at this time:
                 var content = '<table class="table">';
