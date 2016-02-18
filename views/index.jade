@@ -8,10 +8,12 @@ block row-content
         h2 Input Text
         div.row
         form.form-horizontal(method='post')
-          <input role="radio" class="base--radio input--radio" type="radio" id="input-restaurant-reviews" name="rb" value="restaurant-reviews" checked="true">
-          <label class="base--inline-label input--radio-label" for="input-restaurant-reviews">Restaurant Reviews from Yelp</label>
-          <input role="radio" class="base--radio input--radio" type="radio" id="input-product-reviews" name="rb" value="product-reviews">
-          <label class="base--inline-label input--radio-label" for="input-product-reviews">Tech Product Reviews from CNET</label>
+         div
+           input#input-restaurant-reviews.base--radio.input--radio(role='radio', type='radio', name='rb', value='restaurant-reviews', checked='true')
+           label.base--inline-label.input--radio-label(for='input-restaurant-reviews') Restaurant Reviews from Yelp
+           input#input-product-reviews.base--radio.input--radio(role='radio', type='radio', name='rb', value='product-reviews')
+           label.base--inline-label.input--radio-label(for='input-product-reviews') Tech Product Reviews from CNET
+
           div.well
             fieldset
               div.form-group
