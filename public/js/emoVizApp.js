@@ -112,9 +112,21 @@ $(document).ready(function() {
         curEmotionRslts;
 
     // set initial text
-    $text.val(SAMPLE_TEXT);
+    var selected = $("input[name='rb']:checked");
+	if(selected.val() == 'restaurant-reviews')
+    	 $text.val(SAMPLE_TEXT);
+	else
+    	 $text.val(SAMPLE_TEXT2);
+    
+   $text.linedtextarea();
 
-    $text.linedtextarea();
+   $('#input-restaurant-reviews').click(function() {
+    	 $text.val(SAMPLE_TEXT);
+   });
+   
+   $('#input-product-reviews').click(function() {
+    	 $text.val(SAMPLE_TEXT2);
+   });
 
     function getErrorText(error) {
       var errorMapper = {

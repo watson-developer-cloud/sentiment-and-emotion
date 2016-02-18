@@ -7,19 +7,19 @@ block row-content
       div.col-lg-12.col-md-12.col-sm-12.col-xs-12
         h2 Input Text
         div.row
-          p.help-block
-            | Enter the text that you want to analyze. You can analyze the sample text or use your own text. You can incude multiple sections of text by entering each section on a new line.
-
         form.form-horizontal(method='post')
+         div
+           input#input-restaurant-reviews.base--radio.input--radio(role='radio', type='radio', name='rb', value='restaurant-reviews', checked='true')
+           label.base--inline-label.input--radio-label(for='input-restaurant-reviews') Restaurant Reviews from Yelp
+           input#input-product-reviews.base--radio.input--radio(role='radio', type='radio', name='rb', value='product-reviews')
+           label.base--inline-label.input--radio-label(for='input-product-reviews') Tech Product Reviews from CNET
+
           div.well
             fieldset
               div.form-group
                 div
                   textarea#textArea.form-control(name="content", rows='11', 
-                    placeholder="Please enter the text to analyze ...", required="true") 
-                  p
-                    | &nbsp; &nbsp; * Default demo text is the reviews for 
-                    a(href="http://www.cnet.com/products/amazon-echo/user-reviews/#p=amazon-echo") Amazon Echo obtained from CNET.
+                    placeholder="Enter the text that you want to analyze. You can include multiple samples of text by entering each one on a new line. ...", required="true") 
                   
             div.form-group.row(style='margin-bottom: 0px; padding-top: 5px;')
               div.col-lg-2.col-md-2.col-sm-4.col-xs-12
