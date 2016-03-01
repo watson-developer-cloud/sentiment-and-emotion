@@ -35,10 +35,10 @@ emoViz.emoTimeline = function() {
         height = 150,
         animateDuration = 250,
         colorSchema = d3.scale.category20(),
-        bandHeight = 80,
+        bandHeight = 60,
         emotionCategories //= ["anger", "disgust", "sadness", "fear", "none", "joy"]
         , dispatch = d3.dispatch('areaMouseover', 'areaMouseout', 'genomeMouseover', 'genomeMouseout', 'genomeBarMouseover', 'genomeBarMouseout'),
-        emoGenome, startLineIndex = 1;;
+        emoGenome, startLineIndex = 1;
     var maxOpacity = 0.85,
         minOpacity = 0.2;
     //============================================================

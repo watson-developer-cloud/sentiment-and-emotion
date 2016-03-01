@@ -25,7 +25,7 @@
 emoViz = function() {
 	var emoViz = {};
 
-	emoViz.emotionCategories =["anger", "disgust", "sadness", "fear", "joy"];
+	emoViz.emotionCategories =["anger", "disgust", "sadness", "fear", "joy", "NA"];
 
 	emoViz.emcolors = {joy: "rgb(250,219,77)", 
 		trust: "rgb(153,204,51)", 
@@ -35,7 +35,7 @@ emoViz = function() {
 		disgust: "rgb(159,120,186)",
 		anger: "rgb(228,48,84)",
 		anticipation: "rgb(242,153,58)",
-		none: "#CCC"
+		NA: "#CCC"
 	};
 
 	emoViz.showTooltip = function(pos, content, dist) {
