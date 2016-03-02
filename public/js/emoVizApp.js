@@ -113,77 +113,94 @@ $(document).ready(function() {
 
     // set initial text
     var selected = $("input[name='rb']:checked");
-	if(selected.val() == 'restaurant-reviews')
-    	 $text.val(SAMPLE_TEXT);
-	else
-    	 $text.val(SAMPLE_TEXT2);
-    
-   $text.linedtextarea();
+    if (selected.val() == 'restaurant-reviews')
+        $text.val(SAMPLE_TEXT);
+    else
+        $text.val(SAMPLE_TEXT2);
 
-   $('#input-restaurant-reviews').click(function() {
-    	 $text.val(SAMPLE_TEXT);
-   });
-   
-   $('#input-product-reviews').click(function() {
-    	 $text.val(SAMPLE_TEXT2);
-   });
+    $text.linedtextarea();
+
+    $('#input-restaurant-reviews').click(function() {
+        $text.val(SAMPLE_TEXT);
+    });
+
+    $('#input-product-reviews').click(function() {
+        $text.val(SAMPLE_TEXT2);
+    });
 
     function getErrorText(error) {
-      var errorMapper = {
-        "400" : {
-          "unsupported-text-language" : "Input text must be written in English."
-        }
-      };
+        var errorMapper = {
+            "400": {
+                "unsupported-text-language": "Input text must be written in English."
+            }
+        };
 
-      var message;
-      if (errorMapper[error.code]) {
-        var matches = Object.keys(errorMapper[error.code])
-          .filter(function(errorText) { return error.error.indexOf(errorText) != -1; });
-        if (matches.length > 0) {
-          message = errorMapper[error.code][matches[0]];
+        var message;
+        if (errorMapper[error.code]) {
+            var matches = Object.keys(errorMapper[error.code])
+                .filter(function(errorText) {
+                    return error.error.indexOf(errorText) != -1;
+                });
+            if (matches.length > 0) {
+                message = errorMapper[error.code][matches[0]];
+            }
+        } else if (error.code) {
+            message = error.error;
+        } else {
+            message = error;
         }
-      } else if (error.code) {
-        message = error.error;
-      } else {
-        message = error;
-      }
 
-      return message ? message : '';
+        return message ? message : '';
     }
 
     function onAPIError(error) {
-      $loading.hide();
-      showError(getErrorText(error));
+        $loading.hide();
+        showError(getErrorText(error));
     }
 
-    $startOver.click(function(){
+    $startOver.click(function() {
         $inputTextDiv[0].scrollIntoView(true);
-        $inputTextDiv.slideToggle( "slow");
+        $inputTextDiv.slideToggle("slow");
         $resultsDes.hide();
         $results.hide();
     });
 
-    function analyzeText(text, resolve, reject) {
-      var payload = { text: text };
+    function preprocessData(data) {
+        //data.emotions = data.emotion;
+        if (data.sentimentAnalysis.type === "neutral")
+            data.sentimentAnalysis.score = 0;
+        //add N/A score:
+        //find maxium
+        var maxEmScore = 0;
+        emoViz.emotionCategories.forEach(function(cate) {
+            if (data.emotionAnalysis[cate])
+                maxEmScore = (Number(data.emotionAnalysis[cate])>maxEmScore)? Number(data.emotionAnalysis[cate]): maxEmScore;
+        });
+        data.emotionAnalysis.NA = (maxEmScore > 0.5) ? 0 : (1 - maxEmScore);
 
-      return $.ajax({
-        headers: {
-          'csrf-token': $('meta[name="ct"]').attr('content')
-        },
-        type: 'POST',
-        data: payload,
-        url: '/api/alchemy-analysis',
-        dataType: 'json',
-        responseJSON: true,
-        success: function(data) {
-          if (data.sentimentAnalysis.type === "neutral")
-              data.sentimentAnalysis.score = 0;
-          resolve(data);
-        },
-        error: function(err) {
-          reject(err.responseJSON);
-        }
-      });
+        return data;
+    }
+
+    function analyzeText(text, resolve, reject) {
+        var payload = { text: text };
+
+        return $.ajax({
+            headers: {
+                'csrf-token': $('meta[name="ct"]').attr('content')
+            },
+            type: 'POST',
+            data: payload,
+            url: '/api/alchemy-analysis',
+            dataType: 'json',
+            responseJSON: true,
+            success: function(data) {
+
+                resolve(preprocessData(data));
+            },
+            error: function(err) {
+                reject(err.responseJSON);
+            }
+        });
     }
 
     $analyzeBtn.click(function() {
@@ -214,15 +231,16 @@ $(document).ready(function() {
             });
             deferreds.push(
                 analyzeText(val, function(data) {
-                  allResponses[i] = data;
+                    allResponses[i] = data;
                 }, onAPIError)
-              );
+            );
         });
 
 
         $.when.apply(null, deferreds).done(function() {
 
             EMOTION_RSLTS = allResponses;
+            console.log("allResponses", allResponses);
             CUR_EMOTION_RSLTS = (inputText.length > textCountInPage) ? allResponses.slice(0, textCountInPage) : allResponses;
             vizEmotion(CUR_EMOTION_RSLTS, 1);
 

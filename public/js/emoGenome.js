@@ -172,6 +172,8 @@ emoViz.emoGenome = function (){
           .attr("class", "emogenome-bar")
           .attr("x", function(d){ return x(d.x)-genomeWidth/2;})
           .attr("y", function(d){ return y(d.center)- bandHeight/2 + yBand(d.y0+ d.y);})
+          .attr("rx", 5)
+          .attr("ry", 5)
           .attr("width", genomeWidth)
           .attr("height", function(d){ return yBand(1-d.y);})
           .style("fill", function(d) { return colorSchema[d.emotion]; })
