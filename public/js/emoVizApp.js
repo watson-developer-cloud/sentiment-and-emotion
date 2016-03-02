@@ -174,7 +174,7 @@ $(document).ready(function() {
         var maxEmScore = 0;
         emoViz.emotionCategories.forEach(function(cate) {
             if (data.emotionAnalysis[cate])
-                maxEmScore = (Number(data.docEmotions[cate])>maxEmScore)? Number(data.docEmotions[cate]): maxEmScore;
+                maxEmScore = (Number(data.emotionAnalysis[cate])>maxEmScore)? Number(data.emotionAnalysis[cate]): maxEmScore;
         });
         data.emotionAnalysis.NA = (maxEmScore > 0.5) ? 0 : (1 - maxEmScore);
 
