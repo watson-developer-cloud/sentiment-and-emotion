@@ -104,5 +104,5 @@ To troubleshoot your Bluemix app the main useful source of information are the l
 [cloud_foundry]: https://github.com/cloudfoundry/cli
 [sentiment_service]:http://www.alchemyapi.com/api/sentiment-analysis
 [emotion_service]:http://www.alchemyapi.com/api/emotion-analysis
-[getting_started]: http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/getting_started/
+[getting_started]: https://www.ibm.com/watson/developercloud/doc/common/
 [sign_up]: https://console.ng.bluemix.net/registration/
