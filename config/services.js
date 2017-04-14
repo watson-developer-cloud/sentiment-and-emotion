@@ -17,10 +17,10 @@
 'use strict';
 
 var credentials   = require('../credentials'),
-    extend        = require('util')._extend,
-    watson        = require('watson-developer-cloud'),
-    bluemix       = require('./bluemix'),
-    Promise       = require('bluebird');
+  extend        = require('util')._extend,
+  watson        = require('watson-developer-cloud'),
+  bluemix       = require('./bluemix'),
+  Promise       = require('bluebird');
 
 function isDefined(v) {
   return !(typeof v === 'undefined' || v === null);
@@ -55,7 +55,7 @@ module.exports = (function () {
   }
 
   function denodeifyService(service) {
-    var denodeified = {}
+    var denodeified = {};
     Object.keys(service.constructor.prototype)
       .filter(function(key) {
         return key.indexOf('_') != 0;

@@ -19,27 +19,27 @@
 
 
 function arrayUnique(array) {
-    var a = array.concat();
-    for(var i=0; i<a.length; ++i) {
-        for(var j=i+1; j<a.length; ++j) {
-            if(a[i] === a[j])
-                a.splice(j--, 1);
-        }
+  var a = array.concat();
+  for(var i=0; i<a.length; ++i) {
+    for(var j=i+1; j<a.length; ++j) {
+      if(a[i] === a[j])
+        a.splice(j--, 1);
     }
+  }
 
-    return a;
+  return a;
 }
 
 function tokenArrayUnique(array) {
-    var a = array.concat();
-    for(var i=0; i<a.length; ++i) {
-        for(var j=i+1; j<a.length; ++j) {
-            if(a[i].t === a[j].t)
-                a.splice(j--, 1);
-        }
+  var a = array.concat();
+  for(var i=0; i<a.length; ++i) {
+    for(var j=i+1; j<a.length; ++j) {
+      if(a[i].t === a[j].t)
+        a.splice(j--, 1);
     }
+  }
 
-    return a;
+  return a;
 }
 
 function getParameterByName(name)
@@ -55,28 +55,28 @@ function getParameterByName(name)
 }
 
 Array.prototype.includes = function(searchElement) {
-    var O = Object(this);
-    var len = parseInt(O.length) || 0;
-    if (len === 0) {
-      return false;
-    }
-    var n = parseInt(arguments[1]) || 0;
-    var k;
-    if (n >= 0) {
-      k = n;
-    } else {
-      k = len + n;
-      if (k < 0) {k = 0;}
-    }
-    var currentElement;
-    while (k < len) {
-      currentElement = O[k];
-      if (searchElement === currentElement ||
-         (searchElement !== searchElement && currentElement !== currentElement)) {
-        return true;
-      }
-      k++;
-    }
+  var O = Object(this);
+  var len = parseInt(O.length) || 0;
+  if (len === 0) {
     return false;
-  };
+  }
+  var n = parseInt(arguments[1]) || 0;
+  var k;
+  if (n >= 0) {
+    k = n;
+  } else {
+    k = len + n;
+    if (k < 0) {k = 0;}
+  }
+  var currentElement;
+  while (k < len) {
+    currentElement = O[k];
+    if (searchElement === currentElement ||
+         (searchElement !== searchElement && currentElement !== currentElement)) {
+      return true;
+    }
+    k++;
+  }
+  return false;
+};
 

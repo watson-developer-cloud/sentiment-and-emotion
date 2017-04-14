@@ -25,120 +25,120 @@ emoViz.emoText = function() {
     //============================================================
     // Public Variables with Default Settings
     //------------------------------------------------------------
-    var textArray = [],
-        emotionCategories // = ["anger", "disgust", "sadness", "fear", "none", "joy"]
+  var textArray = [],
+    emotionCategories // = ["anger", "disgust", "sadness", "fear", "none", "joy"]
         , dispatch = d3.dispatch('textMouseover', 'textMouseout'),
-        animateDuration = 250,
-        emotionData, wordToText;
+    animateDuration = 250,
+    emotionData, wordToText;
 
     //============================================================
     // Main Implementation
     //------------------------------------------------------------
 
-    function chart(selection) {
-        selection.each(function(data) {
+  function chart(selection) {
+    selection.each(function(data) {
 
-            var container = d3.select(this);
+      var container = d3.select(this);
 
-            container.selectAll(".list")
-                .style("opacity", 1)
+      container.selectAll('.list')
+                .style('opacity', 1)
                 .transition()
                 .duration(animateDuration)
-                .style("opacity", 0)
+                .style('opacity', 0)
                 .remove();
 
-            var group = container.append("div")
-                .attr("class", "list list-group")
-                .attr("id", "text-list-group");
-            var item = group.selectAll(".list .list-group-item")
+      var group = container.append('div')
+                .attr('class', 'list list-group')
+                .attr('id', 'text-list-group');
+      var item = group.selectAll('.list .list-group-item')
                 .data(data);
             // .data(addWordHighlightSpan(wordToText.keys(), data));
 
-            var itemCtnt = item.enter().append("a")
-                .attr("class", "list list-group-item")
-                .attr("id", function(d, i) {
-                    return "text_id_" + i;
+      var itemCtnt = item.enter().append('a')
+                .attr('class', 'list list-group-item')
+                .attr('id', function(d, i) {
+                  return 'text_id_' + i;
                 })
-                .on("mouseover", function(d, i) {
-                    dispatch.textMouseover({
-                        data: d,
-                        index: i,
-                        pos: [d3.event.pageX, d3.event.pageY]
-                    });
+                .on('mouseover', function(d, i) {
+                  dispatch.textMouseover({
+                    data: d,
+                    index: i,
+                    pos: [d3.event.pageX, d3.event.pageY]
+                  });
                 })
-                .on("mouseout", function(d, i) {
-                    dispatch.textMouseout({
-                        data: d,
-                        index: i,
-                        pos: [d3.event.pageX, d3.event.pageY]
-                    });
+                .on('mouseout', function(d, i) {
+                  dispatch.textMouseout({
+                    data: d,
+                    index: i,
+                    pos: [d3.event.pageX, d3.event.pageY]
+                  });
                 });
-            itemCtnt.append("p")
+      itemCtnt.append('p')
                 .html(function(d) {
-                    return d;
+                  return d;
                 });
 
             //var emoBar = itemCtnt.append("div");
 
-        });
+    });
 
-        return chart;
-    }
+    return chart;
+  }
 
     //============================================================
     // Private functions
     //------------------------------------------------------------
 
-    function addWordHighlightSpan(words, data) {
+  function addWordHighlightSpan(words, data) {
 
-        return data.map(function(text) {
+    return data.map(function(text) {
 
-            var rslt = text;
-            words.forEach(function(wd) {
+      var rslt = text;
+      words.forEach(function(wd) {
 
-                rslt = rslt.replace(new RegExp('\\b(' + wd + ')\\b', 'gi'), '<span class="matchedword" ' + '>$1</span>');
+        rslt = rslt.replace(new RegExp('\\b(' + wd + ')\\b', 'gi'), '<span class="matchedword" ' + '>$1</span>');
 
-            });
-            return rslt;
-        });
-    }
+      });
+      return rslt;
+    });
+  }
 
     //============================================================
     // Expose Public Variables
     //------------------------------------------------------------
 
-    chart.dispatch = dispatch;
+  chart.dispatch = dispatch;
 
-    chart.textArray = function(_) {
-        if (!arguments.length) return textArray;
-        textArray = _;
-        return chart;
-    };
-
-    chart.emotionData = function(_) {
-        if (!arguments.length) return emotionData;
-        emotionData = _;
-        return chart;
-    };
-
-    chart.wordToText = function(_) {
-        if (!arguments.length) return wordToText;
-        wordToText = _;
-        return chart;
-    };
-
-    chart.animateDuration = function(_) {
-        if (!arguments.length) return animateDuration;
-        animateDuration = _;
-        return chart;
-    };
-
-    chart.emotionCategories = function(_) {
-        if (!arguments.length) return emotionCategories;
-        emotionCategories = _;
-        return chart;
-    };
-
+  chart.textArray = function(_) {
+    if (!arguments.length) return textArray;
+    textArray = _;
     return chart;
+  };
 
-}
+  chart.emotionData = function(_) {
+    if (!arguments.length) return emotionData;
+    emotionData = _;
+    return chart;
+  };
+
+  chart.wordToText = function(_) {
+    if (!arguments.length) return wordToText;
+    wordToText = _;
+    return chart;
+  };
+
+  chart.animateDuration = function(_) {
+    if (!arguments.length) return animateDuration;
+    animateDuration = _;
+    return chart;
+  };
+
+  chart.emotionCategories = function(_) {
+    if (!arguments.length) return emotionCategories;
+    emotionCategories = _;
+    return chart;
+  };
+
+  return chart;
+
+};

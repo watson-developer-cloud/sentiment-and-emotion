@@ -19,7 +19,7 @@
     "winston": "^2.1.1"
   },
   "engines": {
-    "node": ">=0.12.0"
+    "node": ">=4.5.x"
   },
   "repository": {
     "type": "git",
@@ -50,12 +50,16 @@
   ],
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/watson-developer-cloud/emotion-analysis-nodejs/issues"
+    "url": "https://github.com/watson-developer-cloud/sentiment-and-emotion/issues"
   },
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "lint": "eslint .",
+    "autofix": "eslint . --fix"
   },
-  "homepage": "https://github.com/watson-developer-cloud/emotion-analysis-nodejs#readme",
+  "homepage": "https://github.com/watson-developer-cloud/sentiment-and-emotion#readme",
   "main": "app.js",
-  "devDependencies": {}
+  "devDependencies": {
+    "eslint": "^3.19.0"
+  }
 }

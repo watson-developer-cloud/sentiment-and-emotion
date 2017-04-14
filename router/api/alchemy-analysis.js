@@ -46,7 +46,7 @@ function apiError(res) {
 }
 
 function processAnalysisData(sentimentData, emotionData) {
-  return { sentimentAnalysis: sentimentData.docSentiment, emotionAnalysis: emotionData.docEmotions }
+  return { sentimentAnalysis: sentimentData.docSentiment, emotionAnalysis: emotionData.docEmotions };
 }
 
 function respondWithData(res) {

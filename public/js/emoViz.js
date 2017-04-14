@@ -16,43 +16,51 @@
 
 /**
  * The main entrance of the emotion visualization component.
- * This encloses some configuration and utility functions. 
- *  
+ * This encloses some configuration and utility functions.
+ *
  * @author Liang Gou, lgou@us.ibm.com
- * 
+ *
  */
 
 emoViz = function() {
-	var emoViz = {};
+  var emoViz = {};
 
-	emoViz.emotionCategories =["anger", "disgust", "sadness", "fear", "joy", "NA"];
+  emoViz.emotionCategories = [
+    'anger',
+    'disgust',
+    'sadness',
+    'fear',
+    'joy',
+    'NA'
+  ];
 
-	emoViz.emcolors = {joy: "rgb(250,219,77)", 
-		trust: "rgb(153,204,51)", 
-		fear: "rgb(53,164,80)",
-		surprise: "rgb(63,165,192)", 
-		sadness: "rgb(114,157,201)",
-		disgust: "rgb(159,120,186)",
-		anger: "rgb(228,48,84)",
-		anticipation: "rgb(242,153,58)",
-		NA: "#CCC"
-	};
+  emoViz.emcolors = {
+    joy: 'rgb(250,219,77)',
+    trust: 'rgb(153,204,51)',
+    fear: 'rgb(53,164,80)',
+    surprise: 'rgb(63,165,192)',
+    sadness: 'rgb(114,157,201)',
+    disgust: 'rgb(159,120,186)',
+    anger: 'rgb(228,48,84)',
+    anticipation: 'rgb(242,153,58)',
+    NA: '#CCC'
+  };
 
-	emoViz.showTooltip = function(pos, content, dist) {
-	 	dist = dist || [20,20];
+  emoViz.showTooltip = function(pos, content, dist) {
+    dist = dist || [20, 20];
 
-   	 	var container = document.getElementById("tooltip");
-   	 	
-   	 	container.innerHTML = content;
-   	 	container.style.visibility = "visible";
-	    container.style.left = (pos[0] + dist[0]) + "px";
-	    container.style.top = (pos[1] + dist[1]) + "px";
-	};
-	
-	emoViz.hideTooltip = function() {
-	    var container = document.getElementById("tooltip");
-	    container.style.visibility = "hidden"; 
-	};
+    var container = document.getElementById('tooltip');
 
-	return emoViz;
+    container.innerHTML = content;
+    container.style.visibility = 'visible';
+    container.style.left = (pos[0] + dist[0]) + 'px';
+    container.style.top = (pos[1] + dist[1]) + 'px';
+  };
+
+  emoViz.hideTooltip = function() {
+    var container = document.getElementById('tooltip');
+    container.style.visibility = 'hidden';
+  };
+
+  return emoViz;
 }();
