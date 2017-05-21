@@ -167,8 +167,6 @@ $(document).ready(function() {
   });
 
   function preprocessData(data) {
-
-    console.log("preprocessData:" + JSON.stringify(data, null, 2));
         //data.emotions = data.emotion;
     if (data.sentimentAnalysis.label === 'neutral')
       data.sentimentAnalysis.score = 0;

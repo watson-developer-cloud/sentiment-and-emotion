@@ -16,6 +16,8 @@
 
 /* jslint node: true */
 'use strict';
+// load environment properties from a .env file for local development
+require('dotenv').load({silent: true});
 
 var app = require('express')();
 
