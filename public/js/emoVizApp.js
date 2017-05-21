@@ -167,11 +167,13 @@ $(document).ready(function() {
   });
 
   function preprocessData(data) {
+
+    console.log("preprocessData:" + JSON.stringify(data, null, 2));
         //data.emotions = data.emotion;
-    if (data.sentimentAnalysis.type === 'neutral')
+    if (data.sentimentAnalysis.label === 'neutral')
       data.sentimentAnalysis.score = 0;
         //add N/A score:
-        //find maxium
+        //find maximum
     var maxEmScore = 0;
     emoViz.emotionCategories.forEach(function(cate) {
       if (data.emotionAnalysis[cate])
@@ -191,7 +193,7 @@ $(document).ready(function() {
       },
       type: 'POST',
       data: payload,
-      url: '/api/alchemy-analysis',
+      url: '/api/analyze',
       dataType: 'json',
       responseJSON: true,
       success: function(data) {
