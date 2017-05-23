@@ -35,10 +35,10 @@ module.exports = function (app) {
   app.post('/api/analyze', function(req, res, next) {
 
     var parameters = {
-      'text' : req.body.text,
-      'features': {
-        'sentiment': {},
-        'emotion': {}
+      text : req.body.text,
+      features: {
+        sentiment: {},
+        emotion: {}
       }
     };
     if (process.env.SHOW_DUMMY_DATA) {

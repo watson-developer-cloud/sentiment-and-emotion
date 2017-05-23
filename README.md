@@ -6,7 +6,7 @@ Sentiment and Emotion application detect sentiment and emotions from people's di
 
 Give it a try! Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix.
 
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/naisofly/sentiment-and-emotion)
+[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/watson-developer-cloud/sentiment-and-emotion)
 
 ## Getting Started
 
