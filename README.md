@@ -38,7 +38,7 @@ $ cf login -u <your user ID>
 5. Create the `natural-language-understanding` service in Bluemix
 
 ```sh
-$ cf create-service natural-language-understanding free my-nlu-service
+$ cf create-service natural-language-understanding free nlu-test
 ```
 
 6. Push it live!
