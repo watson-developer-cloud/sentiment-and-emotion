@@ -17,13 +17,15 @@
 'use strict';
 
 // Module dependencies
-var express    = require('express'),
-  bodyParser   = require('body-parser');
+var express = require('express');
+var bodyParser = require('body-parser');
 
 module.exports = function (app) {
 
   // Configure Express
-  app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(bodyParser.urlencoded({
+    extended: true
+  }));
   app.use(bodyParser.json());
 
   // Setup static public directory
@@ -31,7 +33,8 @@ module.exports = function (app) {
   app.set('view engine', 'jade');
   app.set('views', __dirname + '/../views');
 
-  if (process.env.SECURE_EXPRESS)
+  // Only loaded when running in Bluemix
+  if (process.env.VCAP_APPLICATION) {
     require('./security')(app);
-
+  }
 };

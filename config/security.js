@@ -17,12 +17,9 @@
 'use strict';
 
 // security.js
-var secure     = require('express-secure-only'),
-  rateLimit    = require('express-rate-limit'),
-  csrf         = require('csurf'),
-  cookieParser = require('cookie-parser'),
-  helmet       = require('helmet'),
-  request      = require('request');
+var secure = require('express-secure-only');
+var rateLimit = require('express-rate-limit');
+var helmet = require('helmet');
 
 module.exports = function (app) {
   app.enable('trust proxy');
@@ -33,73 +30,22 @@ module.exports = function (app) {
   // 2. helmet with defaults
   app.use(helmet());
 
-  // 3. allow iframes
-  app.use(helmet.frameguard('allow-from', 'https://sentiment-and-emotion.mybluemix.net'));
-
-  // 3. setup cookies
-  var secret = Math.random().toString(36).substring(7);
-  app.use(cookieParser(secret));
-
-  // 4. csrf
-  var csrfProtection = csrf({ cookie: true });
-  app.get('/', csrfProtection, function(req, res, next) {
-    req._csrfToken = req.csrfToken();
-    next();
-  });
-
-  // 5. rate limiting
-  var limiterError = {
-    error : 'Too many requests, please try again in 30 seconds.',
-    code  : 429
-  };
   var limiter = rateLimit({
-    windowMs: 24 * 60 * 60 * 1000, // 24 hours
+    windowMs: 60 * 60 * 1000, // 1 hour
     delayMs: 0,
-    max: 500,
+    max: 50,
     handler: function (req, res) {
       res.format({
-        html: function(){
-          res.status(limiterError.code).end(limiterError.error);
+        html: function () {
+          res.status(429).end('Too many requests, please try again in 30 seconds.');
         },
-        json: function(){
-          res.status(limiterError.code).json(limiterError);
+        json: function () {
+          res.status(429).json('Too many requests, please try again in 30 seconds.');
         }
       });
     },
   });
 
-  // 6. captcha
-  var captchaKeys = {
-    site: process.env.CAPTCHA_SITE || '<captcha-site>',
-    secret: process.env.CAPTCHA_SECRET || '<captcha-secret>',
-  };
 
-  var checkCaptcha = function(req, res, next) {
-    if (req.body && req.body.recaptcha) {
-      request({
-        url: 'https://www.google.com/recaptcha/api/siteverify',
-        method: 'POST',
-        form: {
-          secret: captchaKeys.secret,
-          response: req.body.recaptcha,
-          remoteip: req.ip
-        },
-        json: true
-      }, function(error, response, body) {
-        if (body.success) {
-          limiter.resetIp(req.ip);
-          next();
-        } else {
-          next({
-            code: 'EBADCSRFTOKEN',
-            error: 'Wrong captcha'
-          });
-        }
-      });
-    } else {
-      next();
-    }
-  };
-
-  app.use('/api/', csrfProtection, checkCaptcha, limiter);
+  app.use('/api/', limiter);
 };

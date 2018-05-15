@@ -1,11 +1,8 @@
 ---
 applications:
 - name: sentiment-and-emotion
-  command: node app.js
+  command: npm start
   path: .
-  memory: 1G
+  memory: 512M
   services:
-  - nlu-test
-  env:
-    NODE_ENV: production
-    SECURE_EXPRESS: 1
+  - my-nlu-service

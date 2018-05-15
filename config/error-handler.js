@@ -17,18 +17,14 @@
 /*jslint node: true */
 'use strict';
 
-var logger = require('winston');
-
 module.exports = function (app) {
 
   // eslint-disable-next-line
-  app.use(function(err, req, res, next) {
+  app.use(function (err, req, res, next) {
     var error = {
       code: err.code || 500,
       error: err.error || err.message
     };
-
-    logger.info('error:', error);
 
     res.status(error.code).json(error);
   });

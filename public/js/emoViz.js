@@ -22,7 +22,7 @@
  *
  */
 
-emoViz = function() {
+emoViz = function () {
   var emoViz = {};
 
   emoViz.emotionCategories = [
@@ -46,7 +46,7 @@ emoViz = function() {
     NA: '#CCC'
   };
 
-  emoViz.showTooltip = function(pos, content, dist) {
+  emoViz.showTooltip = function (pos, content, dist) {
     dist = dist || [20, 20];
 
     var container = document.getElementById('tooltip');
@@ -57,7 +57,7 @@ emoViz = function() {
     container.style.top = (pos[1] + dist[1]) + 'px';
   };
 
-  emoViz.hideTooltip = function() {
+  emoViz.hideTooltip = function () {
     var container = document.getElementById('tooltip');
     container.style.visibility = 'hidden';
   };

@@ -1,23 +1,17 @@
 {
   "name": "sentiment-and-emotion",
   "version": "1.0.0",
-  "description": "AlchemyAPI's Sentiment Analysis and Emotion Analysis in one application.",
+  "description": "Natural Language Understanding and Emotion Analysis in one application.",
   "dependencies": {
-    "bluebird": "^3.3.1",
-    "body-parser": "~1.13.2",
-    "cookie-parser": "^1.4.1",
-    "csurf": "^1.8.3",
-    "dotenv": "^4.0.0",
-    "errorhandler": "~1.4.1",
+    "body-parser": "^1.18.3",
+    "dotenv": "^5.0.1",
+    "errorhandler": "^1.5.0",
     "express": "^4.13.3",
     "express-rate-limit": "^2.1.0",
     "express-secure-only": "^0.2.1",
-    "helmet": "^1.1.0",
-    "http-proxy": "^1.13.1",
+    "helmet": "^3.12.0",
     "jade": "~1.11.0",
-    "request": "^2.53.0",
-    "watson-developer-cloud": "^2.25.1",
-    "winston": "^2.1.1"
+    "watson-developer-cloud": "^3.4.x"
   },
   "engines": {
     "node": ">=4.5.x"
@@ -61,6 +55,6 @@
   "homepage": "https://github.com/watson-developer-cloud/sentiment-and-emotion#readme",
   "main": "app.js",
   "devDependencies": {
-    "eslint": "^3.19.0"
+    "eslint": "^4.19.1"
   }
 }

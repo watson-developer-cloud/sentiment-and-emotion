@@ -2,26 +2,9 @@ language: node_js
 dist: trusty
 sudo: required
 node_js: 6
+script:
+- npm run lint
 
 cache:
   directories:
   - node_modules
-
-script: true
-env:
-  global:
-  - CF_APP=sentiment-and-emotion
-  - CF_API=https://api.ng.bluemix.net
-  - CF_ORGANIZATION=WatsonPlatformServices
-  - CF_SPACE=appgallery
-before_deploy: npm install -g cf-blue-green
-deploy:
-  provider: script
-  script:
-  - cf-blue-green-travis
-  on:
-    branch: master
-    repo: watson-developer-cloud/sentiment-and-emotion
-  skip_cleanup: true
-notifications:
-  email: false

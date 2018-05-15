@@ -46,21 +46,21 @@ var CUR_TEXT = '',
 // emotion changes over the time.
 //----------------------------------------------------------
 var emoTimeline = new emoViz.emoTimeline()
-    .width(900)
-    .height(320)
-    .emotionCategories(emoViz.emotionCategories)
-    .colorSchema(emoViz.emcolors)
-    .margin({
-      top: 20,
-      right: 25,
-      bottom: 25,
-      left: 40
-    });
+  .width(900)
+  .height(320)
+  .emotionCategories(emoViz.emotionCategories)
+  .colorSchema(emoViz.emcolors)
+  .margin({
+    top: 20,
+    right: 25,
+    bottom: 25,
+    left: 40
+  });
 
 var emoTimelineSVG = d3.select('#emotion_timeline')
-    .append('svg')
-    .attr('width', emoTimeline.width())
-    .attr('height', emoTimeline.height());
+  .append('svg')
+  .attr('width', emoTimeline.width())
+  .attr('height', emoTimeline.height());
 
 //-------------------------------------------------------
 // emoWordle is the visualization module to show the
@@ -95,7 +95,7 @@ var emoTextDiv = d3.select('#emotion_text'),
 /////////////////////
 // app starts here //
 /////////////////////
-$(document).ready(function() {
+$(document).ready(function () {
   var $text = $('#textArea'),
     $loading = $('#loading'),
     $analyzeBtn = $('.analyze-btn'),
@@ -112,20 +112,20 @@ $(document).ready(function() {
     inputText,
     curEmotionRslts;
 
-    // set initial text
+  // set initial text
   var selected = $('input[name=\'rb\']:checked');
   if (selected.val() == 'restaurant-reviews')
     $text.val(SAMPLE_TEXT);
   else
-        $text.val(SAMPLE_TEXT2);
+    $text.val(SAMPLE_TEXT2);
 
   $text.linedtextarea();
 
-  $('#input-restaurant-reviews').click(function() {
+  $('#input-restaurant-reviews').click(function () {
     $text.val(SAMPLE_TEXT);
   });
 
-  $('#input-product-reviews').click(function() {
+  $('#input-product-reviews').click(function () {
     $text.val(SAMPLE_TEXT2);
   });
 
@@ -139,9 +139,9 @@ $(document).ready(function() {
     var message;
     if (errorMapper[error.code]) {
       var matches = Object.keys(errorMapper[error.code])
-                .filter(function(errorText) {
-                  return error.error.indexOf(errorText) != -1;
-                });
+        .filter(function (errorText) {
+          return error.error.indexOf(errorText) != -1;
+        });
       if (matches.length > 0) {
         message = errorMapper[error.code][matches[0]];
       }
@@ -159,7 +159,7 @@ $(document).ready(function() {
     showError(getErrorText(error));
   }
 
-  $startOver.click(function() {
+  $startOver.click(function () {
     $inputTextDiv[0].scrollIntoView(true);
     $inputTextDiv.slideToggle('slow');
     $resultsDes.hide();
@@ -167,15 +167,15 @@ $(document).ready(function() {
   });
 
   function preprocessData(data) {
-        //data.emotions = data.emotion;
+    //data.emotions = data.emotion;
     if (data.sentimentAnalysis.label === 'neutral')
       data.sentimentAnalysis.score = 0;
-        //add N/A score:
-        //find maximum
+    //add N/A score:
+    //find maximum
     var maxEmScore = 0;
-    emoViz.emotionCategories.forEach(function(cate) {
+    emoViz.emotionCategories.forEach(function (cate) {
       if (data.emotionAnalysis[cate])
-        maxEmScore = (Number(data.emotionAnalysis[cate])>maxEmScore)? Number(data.emotionAnalysis[cate]): maxEmScore;
+        maxEmScore = (Number(data.emotionAnalysis[cate]) > maxEmScore) ? Number(data.emotionAnalysis[cate]) : maxEmScore;
     });
     data.emotionAnalysis.NA = (maxEmScore > 0.5) ? 0 : (1 - maxEmScore);
 
@@ -183,7 +183,9 @@ $(document).ready(function() {
   }
 
   function analyzeText(text, resolve, reject) {
-    var payload = { text: text };
+    var payload = {
+      text: text
+    };
 
     return $.ajax({
       headers: {
@@ -194,17 +196,17 @@ $(document).ready(function() {
       url: '/api/analyze',
       dataType: 'json',
       responseJSON: true,
-      success: function(data) {
+      success: function (data) {
 
         resolve(preprocessData(data));
       },
-      error: function(err) {
+      error: function (err) {
         reject(err.responseJSON);
       }
     });
   }
 
-  $analyzeBtn.click(function() {
+  $analyzeBtn.click(function () {
 
     inputText = preproceText($text.val());
 
@@ -226,19 +228,19 @@ $(document).ready(function() {
     var deferreds = [],
       allResponses = new Array(inputText.length);
 
-    inputText.forEach(function(val, i) {
+    inputText.forEach(function (val, i) {
       sentences.sentences.push({
         'text': val
       });
       deferreds.push(
-                analyzeText(val, function(data) {
-                  allResponses[i] = data;
-                }, onAPIError)
-            );
+        analyzeText(val, function (data) {
+          allResponses[i] = data;
+        }, onAPIError)
+      );
     });
 
 
-    $.when.apply(null, deferreds).done(function() {
+    $.when.apply(null, deferreds).done(function () {
 
       EMOTION_RSLTS = allResponses;
       console.log('allResponses', allResponses);
@@ -254,7 +256,7 @@ $(document).ready(function() {
 
   });
 
-  d3.select(window).on('resize', function() {
+  d3.select(window).on('resize', function () {
     if (EMOTION_RSLTS) {
       resizeEmoTimeline();
     }
@@ -263,7 +265,7 @@ $(document).ready(function() {
   function setupPagination(totalItems, countInPage) {
 
     if (totalItems > countInPage)
-        // init bootpag
+      // init bootpag
       $('#page_selection').bootpag({
         total: (totalItems % countInPage === 0) ? Math.floor(totalItems / countInPage) : Math.floor(totalItems / countInPage) + 1,
         page: 1,
@@ -279,7 +281,7 @@ $(document).ready(function() {
         prevClass: 'prev',
         lastClass: 'last',
         firstClass: 'first'
-      }).on('page', function(event, currentPage) {
+      }).on('page', function (event, currentPage) {
         CUR_TEXT = (inputText.length > textCountInPage) ? inputText.slice((currentPage - 1) * textCountInPage, currentPage * textCountInPage) : inputText;
 
         CUR_EMOTION_RSLTS = EMOTION_RSLTS.slice((currentPage - 1) * countInPage, currentPage * countInPage);
@@ -288,10 +290,10 @@ $(document).ready(function() {
       });
   }
 
-    /**
-     * Display an error or a default message
-     * @param  {String} error The error
-     */
+  /**
+   * Display an error or a default message
+   * @param  {String} error The error
+   */
   function showError(error) {
     var defaultErrorMsg = 'Error processing the request, please try again later.';
     $error.show();
@@ -309,17 +311,17 @@ $(document).ready(function() {
 
     emoTimeline.startLineIndex((currentPage - 1) * textCountInPage + 1);
     emoTimelineSVG.datum(emodata)
-            .call(emoTimeline);
+      .call(emoTimeline);
 
 
 
     emoText.emotionData(emodata);
 
     emoTextDiv.datum(CUR_TEXT)
-            .call(emoText);
+      .call(emoText);
 
     resizeEmoTimeline();
-        //resizeEmoWordle();
+    //resizeEmoWordle();
 
   }
 
@@ -331,55 +333,55 @@ $(document).ready(function() {
       nh = (rslDiv.property('clientHeight') < 200) ? 200 : (rslDiv.property('clientHeight') > 350 ? 350 : rslDiv.property('clientHeight'));
 
     rslDiv.select('svg')
-            .attr('width', nw)
-            .attr('height', nh);
+      .attr('width', nw)
+      .attr('height', nh);
 
     emoTimeline.width(nw)
-            .height(nh);
+      .height(nh);
 
     emoTimelineSVG
-            .call(emoTimeline);
+      .call(emoTimeline);
 
   }
 
 
-    //preprocess text input data
+  //preprocess text input data
   function preproceText(text) {
     var results = [];
     text.split('\n')
-            .forEach(function(ele) {
-              if (ele)
-                if (ele.trim() !== '')
-                  if (results.length <= MAX_LINE_COUNT) results.push(ele);
-            });
+      .forEach(function (ele) {
+        if (ele)
+          if (ele.trim() !== '')
+            if (results.length <= MAX_LINE_COUNT) results.push(ele);
+      });
     return results;
 
   }
-    //-------------------------------------
-    // highlight/unhighlight functions
-    //-------------------------------------
+  //-------------------------------------
+  // highlight/unhighlight functions
+  //-------------------------------------
   function highlightEmoGenomeByIndex(index) {
-        //highlight the corresponding emoGenome bar in the timeline
+    //highlight the corresponding emoGenome bar in the timeline
     var cur = d3.select('#emogenome_index_' + index);
 
     cur.transition()
-            .duration(animateDuration)
-            .style('opacity', 1);
+      .duration(animateDuration)
+      .style('opacity', 1);
 
     emoTimeline.emoGenome().highlightGenome(cur);
-        //fade out the emotion bands
+    //fade out the emotion bands
     d3.selectAll('.emobands')
-            .style('opacity', 1)
-            .transition()
-            .duration(animateDuration)
-            .style('opacity', 0.25);
+      .style('opacity', 1)
+      .transition()
+      .duration(animateDuration)
+      .style('opacity', 0.25);
 
 
-        //show tooltips
-        //get the sliced data for the current genome
+    //show tooltips
+    //get the sliced data for the current genome
     var pdata = emoTimeline.emoGenome().slicedData()[index];
 
-        //show the popup of the emotion scores at this time:
+    //show the popup of the emotion scores at this time:
     var content = '<table class="table">';
 
     for (var i = pdata.emotions.length - 1; i >= 0; i--) {
@@ -393,52 +395,52 @@ $(document).ready(function() {
       content += '</tr>';
     }
 
-        //Note: the tooltip's position is dependent on its top layer div -'results_row';
+    //Note: the tooltip's position is dependent on its top layer div -'results_row';
     var resultsDivP = $('#results_row').position();
 
     emoViz.showTooltip([resultsDivP.left + Number(cur.attr('centerX')), resultsDivP.top + Number(cur.attr('centerY'))], content, [100, 20]);
   }
 
   function unhighlightEmoGenomeByIndex(index) {
-        //unhighlight the corresponding emoGenome bar in the timeline
+    //unhighlight the corresponding emoGenome bar in the timeline
 
     d3.selectAll('.emogenome').transition()
-            .duration(animateDuration)
-            .style('opacity', null);
+      .duration(animateDuration)
+      .style('opacity', null);
 
     var cur = d3.select('#emogenome_index_' + index);
 
     emoTimeline.emoGenome().unhighlightGenome(cur);
 
     d3.selectAll('.emobands')
-            .transition()
-            .duration(animateDuration)
-            .style('opacity', 1);
+      .transition()
+      .duration(animateDuration)
+      .style('opacity', 1);
 
     emoViz.hideTooltip();
   }
 
 
-    //-------------- highlight/unhighlight helpers---------//
+  //-------------- highlight/unhighlight helpers---------//
 
-    //--------------------------------------------------
-    // Setting up all event listeners
-    //--------------------------------------------------
+  //--------------------------------------------------
+  // Setting up all event listeners
+  //--------------------------------------------------
 
-    // all event process for emoTimeline:
-  emoTimeline.dispatch.on('areaMouseover', function(d) {
+  // all event process for emoTimeline:
+  emoTimeline.dispatch.on('areaMouseover', function (d) {
     emoViz.showTooltip(d.pos, d.name);
   });
 
-  emoTimeline.dispatch.on('areaMouseout', function(d) {
+  emoTimeline.dispatch.on('areaMouseout', function (d) {
     emoViz.hideTooltip(d.pos, d.name);
   });
 
-  emoTimeline.dispatch.on('genomeMouseover', function(d) {
-        //highlight the text
+  emoTimeline.dispatch.on('genomeMouseover', function (d) {
+    //highlight the text
     d3.select('#text_id_' + d.data.index).attr('class', 'list-group-item list-group-item-success');
 
-        // Scroll container to offset of the highlighted text
+    // Scroll container to offset of the highlighted text
     var highlighted = document.querySelector('#text_id_' + d.data.index);
     highlighted.parentNode.scrollTop = highlighted.offsetTop - 100;
 
@@ -446,23 +448,23 @@ $(document).ready(function() {
 
   });
 
-  emoTimeline.dispatch.on('genomeMouseout', function(d) {
-        //unhighlight the text;
+  emoTimeline.dispatch.on('genomeMouseout', function (d) {
+    //unhighlight the text;
     d3.select('#text_id_' + d.data.index).attr('class', 'list-group-item');
-        //unhighlightEmoWordsByIndex();
+    //unhighlightEmoWordsByIndex();
   });
 
 
-    // all event process for text:
-  emoText.dispatch.on('textMouseover', function(d) {
+  // all event process for text:
+  emoText.dispatch.on('textMouseover', function (d) {
     highlightEmoGenomeByIndex(d.index);
 
   });
 
-  emoText.dispatch.on('textMouseout', function(d) {
+  emoText.dispatch.on('textMouseout', function (d) {
     unhighlightEmoGenomeByIndex(d.index);
 
   });
-    //-------------- end of event listener setting up---------//
+  //-------------- end of event listener setting up---------//
 
 });

@@ -18,13 +18,13 @@ block row-content
             fieldset
               div.form-group
                 div
-                  textarea#textArea.form-control(name="content", rows='11', 
-                    placeholder="Enter the text that you want to analyze. You can include multiple samples of text by entering each one on a new line. ...", required="true") 
-                  
+                  textarea#textArea.form-control(name="content", rows='11',
+                    placeholder="Enter the text that you want to analyze. You can include multiple samples of text by entering each one on a new line. ...", required="true")
+
             div.form-group.row(style='margin-bottom: 0px; padding-top: 5px;')
               div.col-lg-2.col-md-2.col-sm-4.col-xs-12
                 a.btn-secondary.btn-block.analyze-btn(role="button", ) Analyze
-              
+
     //- results section
     div#results_description.row(style='display:none;')
       div.col-lg-12.col-md-12.col-sm-12.col-xs-12
@@ -41,23 +41,17 @@ block row-content
       div.col-lg-12.col-md-12.col-sm-12.col-xs-12.well
         p.errorMsg
 
-    div#results_row.row   
+    div#results_row.row
       div#emotion_rslts(style='display:none;').col-lg-12.col-md-12.col-sm-12.col-xs-12.well
         div.form-group.row
           div.col-lg-12.col-md-12.col-sm-12.col-xs-12
             div#emotion_overview
               div.col-lg-12.col-md-12.col-sm-12.col-xs-12
                 div.panel.panel-default
-                  //div.panel-heading
-                    //p Emotion Overview
                   div.panel-body
                     div#emotion_timeline
                     div#page_selection.col-lg-6.col-lg-offset-4.col-md-6.col-md-offset-4
             div#emotion_details
-                  //div.col-lg-5.col-md-5.col-sm-5
-                  //  div.panel.panel-default
-                  //    div.panel-body#emotion_words(style="padding:0px;")
-                  //div.col-lg-7.col-md-7.col-sm-7
               div.col-lg-12.col-md-12.col-sm-12.col-xs-12
                 div#emotion_text.panel.panel-default
                   div.panel-body(style="padding:0px;")
@@ -65,6 +59,4 @@ block row-content
             div.col-lg-4.col-lg-push-8.col-md-4.col-md-push-8.col-sm-4.col-sm-push-8.col-xs-12
               img.icon.reset-icon(src="images/reset.svg")
               a#start_over Start Over
-              
-              
-    div#tooltip.well      
+    div#tooltip.well
