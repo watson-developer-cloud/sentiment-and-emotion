@@ -1,5 +1,7 @@
 # Sentiment and Emotion Tracker using Natural Language Understanding
 
+## DEPRECATED: this repo is no longer actively maintained. It can still be used as reference, but may contain outdated or unpatched code.
+
 Sentiment and Emotion application detect sentiment and emotions from people's digital footprints (e.g., online reviews and social media text) with [IBM Waston](watson) Technology. The application can reveal the overall emotion and sentiment patterns from a text of interest, including the changes and details of positive or negative sentiment and emotions of "anger", "disgust", "sadness", "fear" and "joy".
 
  ![Sentiment & Emotion Tracker](http://i.imgur.com/kEg5hBi.png)
